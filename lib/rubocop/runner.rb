@@ -65,6 +65,9 @@ module RuboCop
     end
 
     def run(paths)
+      <<-COMMENT
+        find_target_files(paths)で相対パスで指定していたファイルを絶対パスにしてinspect_files(target_files)でオートコレクトを実行している
+      COMMENT
       target_files = find_target_files(paths)
       if @options[:list_target_files]
         list_files(target_files)
@@ -134,7 +137,6 @@ module RuboCop
       files.reduce(true) do |all_passed, file|
         offenses = process_file(file)
         yield file
-
         if offenses.any? { |o| considered_failure?(o) }
           break false if @options[:fail_fast]
 
