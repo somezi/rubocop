@@ -92,6 +92,11 @@ module RuboCop
         end
 
         def on_investigation_end
+          <<-COMMENT
+            processed_sourceで1つのファイル全体を見ている
+            processed_source.linesで1行ずつの配列にする
+            ["# frozen_string_literal: true", "", "ARRAY = %w[AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA BBBB].freeze", ""]
+          COMMENT
           processed_source.lines.each_with_index do |line, line_index|
             check_line(line, line_index)
           end
@@ -169,6 +174,10 @@ module RuboCop
         end
 
         def check_line(line, line_index)
+          binding.pry
+          <<-COMMENT
+            line_length(line)はインデントを含めて行数をカウントしている
+          COMMENT
           return if line_length(line) <= max
           return if allowed_line?(line, line_index)
 
@@ -181,6 +190,11 @@ module RuboCop
         end
 
         def allowed_line?(line, line_index)
+          <<-COMMENT
+            allowed_patternsの中身: [/\A +(it|describe|context|shared_examples|include_examples|it_behaves_like) ["']/]
+            特殊なパターンを許可するようにしているみたい
+            rspecでdescribe意外にも新しいパターンが出てきた場合はそれに対応するように追加しなければいけないので、rubocopも一緒にバージョンアップする必要がある
+          COMMENT
           matches_allowed_pattern?(line) ||
             shebang?(line, line_index) ||
             (heredocs && line_in_permitted_heredoc?(line_index.succ))

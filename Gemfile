@@ -20,6 +20,8 @@ gem 'simplecov', '~> 0.10', '< 0.18'
 gem 'stackprof', platform: :mri
 gem 'test-queue'
 gem 'yard', '~> 0.9'
+gem 'pry-stack_explorer'
+gem 'pry-byebug'
 
 group :test do
   gem 'webmock', require: false

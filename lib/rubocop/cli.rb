@@ -37,6 +37,13 @@ module RuboCop
     #
     # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     def run(args = ARGV)
+      <<-COMMENT
+        rubocopコマンドを実行するとここから動作する
+        @optionsの中身: {:autocorrect_all=>true, :autocorrect=>true, :disable_uncorrectable=>true}
+        pathsの中身: ["test_case.rb"]
+        execute_runnersで実際にオートコレクトなどのコード修正が実行される
+      COMMENT
+
       @options, paths = Options.new.parse(args)
       @env = Environment.new(@options, @config_store, paths)
 
@@ -122,6 +129,11 @@ module RuboCop
       if @options[:auto_gen_config]
         run_command(:auto_gen_config)
       else
+        <<-COMMENT
+          tap { suggest_extensions }がなければ bundle exec rubocopコマンドのときに警告がでないと思ったがそうではなかった
+          ここが動作している。詳細はあとで
+          https://github.com/KessaPassa/rubocop/blob/116a72b05721526fe2724196cbd97a8d0772ecca/lib/rubocop/cli/command/suggest_extensions.rb#L17
+        COMMENT
         run_command(:execute_runner).tap { suggest_extensions }
       end
     end
@@ -145,6 +157,9 @@ module RuboCop
          @config_store.for_pwd.for_all_cops['UseCache'] != false
         puts 'Use parallel by default.' if @options[:debug]
 
+        <<-COMMENT
+          parallelオプションを明示的につけなくてもキャッシュを使わなければ勝手にparallelになる
+        COMMENT
         @options[:parallel] = true
       end
     end
