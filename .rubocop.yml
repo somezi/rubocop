@@ -203,3 +203,7 @@ Gemspec/DependencyVersion:
 
 Style/RequireOrder:
   Enabled: true
+
+Style/MethodCallWithArgsParentheses:
+  EnforcedStyle: omit_parentheses
+  AllowParenthesesInMultilineCall: true
