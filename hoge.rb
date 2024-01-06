@@ -9,5 +9,6 @@ end
 class Bar < Foo
   def foo(arg)
     super(arg)
+    pp args
   end
 end
