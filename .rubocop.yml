@@ -207,3 +207,11 @@ Style/RequireOrder:
 Style/MethodCallWithArgsParentheses:
   EnforcedStyle: omit_parentheses
   AllowParenthesesInMultilineCall: true
+  Enabled: true
+
+# Style/SuperWithArgsParentheses:
+#   Enabled:
+#     - 'foo.rb'
+
+Style/Documentation:
+  Enabled: false
