@@ -48,8 +48,8 @@ Layout/EndOfLine:
 Layout/ClassStructure:
   Enabled: true
 
-Layout/RedundantLineBreak:
-  Enabled: true
+# Layout/RedundantLineBreak:
+#   Enabled: true
 
 Layout/TrailingWhitespace:
   AllowInHeredoc: false
@@ -202,4 +202,11 @@ Gemspec/DependencyVersion:
   Enabled: true
 
 Style/RequireOrder:
+  Enabled: true
+
+Layout/RedundantLineBreak:
+  Enabled: true
+  InspectBlocks: true
+
+Style/SingleLineDoEndBlock:
   Enabled: true
